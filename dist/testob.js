@@ -1,4 +1,4 @@
-// Package: testob v0.1.0 (built 2017-07-19 08:02:18)
+// Package: testob v0.1.0 (built 2017-07-19 09:04:53)
 // Copyright: (C) 2017 Michael Wright <mjw@methodanalysis.com>
 // License: MIT
 
@@ -151,7 +151,9 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 		basic: testob_basic,
 	};
 } else {
-	window.testob_basic = testob_basic;
+	window.testob = {
+		basic: testob_basic,
+	};
 }
 
 

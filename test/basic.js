@@ -10,7 +10,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 	testob_basic = testob.basic;
 	require('chai-jasmine');
 } else {
-	testob_basic = window.testob_basic;
+	testob_basic = window.testob.basic;
 }
 
 
