@@ -1,6 +1,6 @@
 'use strict';
 
-// Package: testob v0.1.1 (built 2017-07-24 10:08:55)
+// Package: testob v0.1.2 (built 2017-07-24 10:10:15)
 // Copyright: (C) 2017 Michael Wright <mjw@methodanalysis.com>
 // License: MIT
 
