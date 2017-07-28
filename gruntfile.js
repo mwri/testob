@@ -13,11 +13,11 @@ module.exports = function(grunt) {
 				banner: '// Package: <%= pkg.name %> v<%= pkg.version %> (built <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %>)\n// Copyright: (C) 2017 <%= pkg.author.name %> <<%= pkg.author.email %>>\n// License: <%= pkg.license %>\n\n\n',
 			},
 			es5: {
-				src: ['lib/**/*.js'],
+				src: ['lib/*.js'],
 				dest: 'dist/<%= pkg.name %>_es5.js',
 			},
 			es6: {
-				src: ['lib/**/*.js'],
+				src: ['lib/*.js'],
 				dest: 'dist/<%= pkg.name %>.js',
 			},
 		},
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 		},
 
 		jshint: {
-			files: ['gruntfile.js', 'lib/**/*.js', 'test/**/*.js'],
+			files: ['gruntfile.js', 'lib/*.js', 'test/*.js'],
 			options: {
 				esversion: 6,
 				laxbreak: true,
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 				options: {
 					files: [
 						'dist/testob_es5.min.js',
-						'test/**/*.js',
+						'test/*.js',
 					],
 					basePath:    '',
 					urlRoot:     '/',
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
 				options: {
 					files: [
 						'dist/testob.js',
-						'test/**/*.js',
+						'test/*.js',
 					],
 					basePath:    '',
 					urlRoot:     '/',
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 				options: {
 					files: [
 						'dist/testob_es5.min.js',
-						'test/**/*.js',
+						'test/*.js',
 					],
 					basePath:    '',
 					urlRoot:     '/',
@@ -120,7 +120,7 @@ module.exports = function(grunt) {
 				options: {
 					files: [
 						'dist/testob.js',
-						'test/**/*.js',
+						'test/*.js',
 					],
 					basePath:    '',
 					urlRoot:     '/',
@@ -149,34 +149,15 @@ module.exports = function(grunt) {
 			},
 		},
 
-		node_mocha: {
-			es6: {
-				src : ['test/**/*.js'],
-				options : {
-					slow: 3000,
-					timeout: 5000,
-					reportFormats : ['lcov'],
-					coverageFolder: 'coverage/node/',
-					runCoverage : true,
-				},
+		simplemocha: {
+			all: {
+				src: ['test/*.js'],
 			},
-			es6_nocov: {
-				src : ['test/**/*.js'],
-				options : {
-					slow:           3000,
-					timeout:        5000,
-					fullTrace:      true,
-				},
-			},
-			travis_ci_es6: {
-				src : ['test/**/*.js'],
-				options : {
-					slow: 3000,
-					timeout: 5000,
-					reportFormats : ['lcovonly'],
-					coverageFolder: 'coverage/node/',
-					runCoverage : true,
-				},
+		},
+
+		mocha_istanbul: {
+			all: {
+				src: ['test/*.js'],
 			},
 		},
 
@@ -204,8 +185,8 @@ module.exports = function(grunt) {
 					spawn: true,
 				},
 				files: [
-					'lib/**/*.js',
-					'test/**/*.js',
+					'lib/*.js',
+					'test/*.js',
 				],
 				tasks: ['build'],
 			},
@@ -214,8 +195,8 @@ module.exports = function(grunt) {
 					spawn: true,
 				},
 				files: [
-					'lib/**/*.js',
-					'test/**/*.js',
+					'lib/*.js',
+					'test/*.js',
 				],
 				tasks: ['dev'],
 			},
@@ -231,7 +212,7 @@ module.exports = function(grunt) {
 		'uglify',
 		'karma:es5',
 		'karma:es6',
-		'node_mocha:es6',
+		'mocha_istanbul',
 		]);
 
 	grunt.registerTask('travis_ci_build', [
@@ -242,14 +223,14 @@ module.exports = function(grunt) {
 		'uglify',
 		'karma:travis_ci_es5',
 		'karma:travis_ci_es6',
-		'node_mocha:travis_ci_es6',
+		'mocha_istanbul',
 		'lcovMerge',
 		]);
 
 	grunt.registerTask('dev', [
 		'jshint',
 		'concat:es6',
-		'node_mocha:es6_nocov',
+		'simplemocha',
 		]);
 
 	grunt.registerTask('default', ['build']);
