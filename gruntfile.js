@@ -158,6 +158,9 @@ module.exports = function(grunt) {
 		mocha_istanbul: {
 			all: {
 				src: ['test/*.js'],
+				options: {
+					coverageFolder: 'coverage/node/',
+				},
 			},
 		},
 
